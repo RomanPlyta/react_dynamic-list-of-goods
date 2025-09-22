@@ -15,8 +15,9 @@ export async function getAll(): Promise<Good[]> {
 
     return data;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('error getAll', error);
-    throw error;
+    throw error; // пробрасываем дальше
   }
 }
 
@@ -26,9 +27,9 @@ export const get5First = async (): Promise<Good[]> => {
 
     return [...goods].sort((a, b) => a.name.localeCompare(b.name)).slice(0, 5);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('error get5First', err);
-
-    return [];
+    throw err; // 🔴 вместо return []
   }
 };
 
@@ -38,8 +39,8 @@ export const getRed = async (): Promise<Good[]> => {
 
     return goods.filter(good => good.color === 'red');
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('error getRed', err);
-
-    return [];
+    throw err; // 🔴 вместо return []
   }
 };

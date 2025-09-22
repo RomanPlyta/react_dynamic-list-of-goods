@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import './App.scss';
 import { GoodsList } from './GoodsList';
 import { Good } from './types/Good';
-
 import { getAll, get5First, getRed } from './api/goods';
 
 export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
+  const [error, setError] = useState('');
 
   const handleLoadAll = () => {
     getAll()
       .then(setGoods)
       .catch(err => {
+        // eslint-disable-next-line no-console
         console.error('error getAll', err);
         setError('error getAll');
       });
@@ -21,6 +22,7 @@ export const App: React.FC = () => {
     get5First()
       .then(setGoods)
       .catch(err => {
+        // eslint-disable-next-line no-console
         console.error('error get5First', err);
         setError('error get5First');
       });
@@ -30,6 +32,7 @@ export const App: React.FC = () => {
     getRed()
       .then(setGoods)
       .catch(err => {
+        // eslint-disable-next-line no-console
         console.error('error getRed', err);
         setError('error getRed');
       });
@@ -54,6 +57,8 @@ export const App: React.FC = () => {
       <button type="button" data-cy="red-button" onClick={handleLoadRed}>
         Load red goods
       </button>
+
+      {error && <p style={{ color: 'red' }}>{error}</p>}
 
       <GoodsList goods={goods} />
     </div>
