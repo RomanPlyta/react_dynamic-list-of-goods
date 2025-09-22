@@ -9,15 +9,30 @@ export const App: React.FC = () => {
   const [goods, setGoods] = useState<Good[]>([]);
 
   const handleLoadAll = () => {
-    getAll().then(setGoods);
+    getAll()
+      .then(setGoods)
+      .catch(err => {
+        console.error('error getAll', err);
+        setError('error getAll');
+      });
   };
 
   const handleLoadFirstFive = () => {
-    get5First().then(setGoods);
+    get5First()
+      .then(setGoods)
+      .catch(err => {
+        console.error('error get5First', err);
+        setError('error get5First');
+      });
   };
 
   const handleLoadRed = () => {
-    getRed().then(setGoods);
+    getRed()
+      .then(setGoods)
+      .catch(err => {
+        console.error('error getRed', err);
+        setError('error getRed');
+      });
   };
 
   return (
